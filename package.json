@@ -2,20 +2,21 @@
   "name": "botter",
   "version": "1.0.0",
   "description": "Bot for doing complicated stuff easy",
-  "main": "index.js",
+  "type": "module",
   "dependencies": {
     "csv-write-stream": "^2.0.0",
     "dotenv": "^16.0.1",
     "playwright": "^1.22.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "inquirer": "^9.0.0"
   },
   "scripts": {
+    "generar": "node -r dotenv/config ./src/generar/main.js",
+    "multi-generar": "node -r dotenv/config ./src/multiGenerador/index.js",
+    "generar-vep": "node -r dotenv/config ./src/generarVep/generar-vep.js",
+    "consultar": "node -r dotenv/config ./src/consultar/busquedaMensual.js.js",
+    "consultar-anual": "node -r dotenv/config ./src/consultar/busquedaAnual.js",
     "test": "node -r dotenv/config test.js",
-    "generar": "node -r dotenv/config index.js",
-    "multi-generar": "node -r dotenv/config Multigenerador/index.js",
-    "generar-vep": "node -r dotenv/config generar-vep.js",
-    "consultar": "node -r dotenv/config consultar.js",
-    "consultar-anual": "node -r dotenv/config consultar-anualizado.js",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint .",

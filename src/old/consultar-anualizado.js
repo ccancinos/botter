@@ -3,7 +3,7 @@ const {
   sanitizeNumber,
   getFormatedDate,
   getDatesfromOneYearBack,
-  saveToCSV
+  saveToCSV,
 } = require('./helper.js')
 
 const playwright = require('playwright')
@@ -93,12 +93,17 @@ async function main() {
     const rowsDates = await facturadorPage.locator(
       'table#tablaDataTables tr td.sorting_1'
     )
-    const count = await rowsAmounts.count();
-    let valorFactura;
+    const count = await rowsAmounts.count()
+    let valorFactura
     for (let i = 0; i < count; ++i) {
-      valorFactura = sanitizeNumber(await rowsAmounts.nth(i).textContent());
+      valorFactura = sanitizeNumber(await rowsAmounts.nth(i).textContent())
       totalAnual += valorFactura
-      saveToCSV(await rowsDates.nth(i).textContent(), 'sin detalle', valorFactura, 'DetallesAnuales')
+      saveToCSV(
+        await rowsDates.nth(i).textContent(),
+        'sin detalle',
+        valorFactura,
+        'DetallesAnuales'
+      )
     }
     await facturadorPage.click('text=Consulta')
     await facturadorPage.waitForTimeout(1000)

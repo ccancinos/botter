@@ -1,6 +1,6 @@
 const playwright = require('playwright')
 const { rounder, login } = require('../helper.js')
-const {saveToCSV, dateFormatted} = require("../helper");
+const { saveToCSV, dateFormatted } = require('../helper')
 
 let facturas
 
@@ -90,6 +90,12 @@ async function generarPara(facturadorPage, factura) {
   )
 
   saveToCSV(dateFormatted(), factura.detalle, factura.monto)
+  saveToCSV(
+    dateFormatted(),
+    factura.descripcion,
+    factura.monto,
+    'using_description'
+  )
 
   await facturadorPage.waitForTimeout(1000)
 

@@ -30,6 +30,7 @@ async function main() {
   await login(page)
 
   await navigationPromise
+  // Pagina: PortalVerTodosToComprobantesEnLinea ==> SelectComprobantesEnLinea
   await page.click('text=Ver todos')
   await page.waitForTimeout(1000)
   await page.click('text=Comprobantes en línea')
@@ -38,13 +39,13 @@ async function main() {
   let pages = await context.pages()
   const facturadorPage = pages[1]
 
-  // Pagina
+  // Pagina: SelectEmpresa (CANCINOS CLAUDIO FERNANDO)
   await facturadorPage.click(`input[value="${process.env.USER_NAME}"]`)
 
-  // Pagina
+  // Pagina: SelectGenerarComprobantes
   await facturadorPage.click('text=Generar Comprobantes')
   await facturadorPage.waitForTimeout(1000)
-  // Pagina
+  // Pagina: GeneracionDeComprobantes (Puntos de Vta y Tipos de Comprobantes)
   await facturadorPage.selectOption(
     'select[name="puntoDeVenta"]',
     process.env.N_PUNTO_VENTA || '1'
@@ -53,17 +54,19 @@ async function main() {
   await facturadorPage.waitForTimeout(1000)
   await facturadorPage.click('input[value="Continuar >"]')
   await facturadorPage.waitForTimeout(1000)
-  // Pagina
+  // Pagina: DatosDeEmision (paso 1 de 4 - genracion de comprobantes - factura c)
   await facturadorPage.selectOption('select[name="idConcepto"]', '2')
   await facturadorPage.waitForTimeout(1000)
+  // TODO Agregar Periodo Facturado
+  // Desde: id="fst" name="periodoFacturadoDesde" ej: 03/09/2023
+  // Hasta: id="fsh" name="periodoFacturadoHasta" ej: 03/09/2023
+  // Vto para el pago: id="vencimientopago" name="vencimientoPago" ej: 03/09/2023
   await facturadorPage.click('input[value="Continuar >"]')
-  // Pagina
-  await facturadorPage.selectOption('select[name="idIVAReceptor"]', '5')
-  await facturadorPage.waitForTimeout(1000)
+  // Pagina: DatosDelReceptor (paso 2 de 4 = generacion de comprobantes = factura c) await facturadorPage.selectOption('select[name="idIVAReceptor"]', '5') await facturadorPage.waitForTimeout(1000)
   await facturadorPage.click('input[name="formaDePago"]')
   await facturadorPage.click('input[value="Continuar >"]')
   await facturadorPage.waitForTimeout(1000)
-  // Pagina
+  // Pagina: DatosDeLaOperacion (paso 3 de 4 = Generacion de comprobantes = factura c)
   await facturadorPage.fill('input[name="detalleCodigoArticulo"]', '1')
   await facturadorPage.waitForTimeout(1000)
 
