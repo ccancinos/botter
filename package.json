@@ -12,10 +12,9 @@
   },
   "scripts": {
     "generar": "node -r dotenv/config ./src/generar/main.js",
-    "multi-generar": "node -r dotenv/config ./src/multiGenerador/index.js",
+    "consultar": "node -r dotenv/config ./src/consultar/consultaMensual.js",
+    "consultar-anual": "node -r dotenv/config ./src/consultar/consultaAnual.js",
     "generar-vep": "node -r dotenv/config ./src/generarVep/generar-vep.js",
-    "consultar": "node -r dotenv/config ./src/consultar/busquedaMensual.js.js",
-    "consultar-anual": "node -r dotenv/config ./src/consultar/busquedaAnual.js",
     "test": "node -r dotenv/config test.js",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",

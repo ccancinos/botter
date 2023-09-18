@@ -1,11 +1,13 @@
 import { v1 } from 'uuid'
-import { yearMonthAsString, rounder } from '../common/helper'
+import { yearMonthAsString, rounder } from '../common/helper.js'
 
 export const descargarFacturas = async (context) => {
   const rows = context.page.locator(
     'table.jig_table tr td[title="Fecha de Emisión"]'
   )
   const count = await rows.count()
+  console.log('downloading:', count, 'invoices')
+
   let fechasComprobantes = []
   for (let i = 0; i < count; ++i) {
     fechasComprobantes.push(await rows.nth(i).textContent())

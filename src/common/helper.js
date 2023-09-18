@@ -1,5 +1,5 @@
 export const randomArrayElement = (array) => {
-  var random = Math.floor(Math.random() * array.length)
+  let random = Math.floor(Math.random() * array.length)
   return array[random]
 }
 

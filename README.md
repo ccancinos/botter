@@ -60,8 +60,8 @@ npm run consultar-anual
 
 # TODO:
 
-- Generar múltiples facturas de distintos montos
-- Generación de factura con ingreso de datos manual
+- Consultar facturación anualizada de los últimos 12 meses
+- Consulta de exclusión del monotributo de prestación de servicios [por gastos](https://youtu.be/erNIEGW3IHY?t=677)
 - Generación de VEP
 
 # Desarrollo

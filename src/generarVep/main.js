@@ -3,7 +3,7 @@ import { login } from '../common/login.js'
 
 // TODO implement this when I can access the screen
 async function main() {
-  let stepsClasses = [
+  let steps = [
     login,
     selectMonotributo, // navega a otra página, hay que hacer el waitForNavigation
     selectPagar, //hay que mejorarle el xpath
@@ -13,7 +13,7 @@ async function main() {
 
   await context.init()
   
-  for (let step of stepsClasses) {
+  for (let step of steps) {
     await step(context)
   }
 

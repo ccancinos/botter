@@ -1,7 +1,7 @@
-import { dateOneYearBack  } from '../common/helper'
-import { busquedaDeComprobantes } from '../common/busquedaDeComprobantes'
+import { dateOneYearBack, dateFormatted } from '../common/helper.js'
+import { busquedaDeComprobantes } from '../common/busquedaDeComprobantes.js'
 
-export const busquedaMensual = async (context) => {
-  context.setInvoiceSearchStartDate(dateOneYearBack())
+export const busquedaAnual = async (context) => {
+  context.setInvoiceSearchStartDate(dateFormatted(dateOneYearBack()))
   busquedaDeComprobantes(context)
 }

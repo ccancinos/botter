@@ -5,12 +5,9 @@ export const busquedaDeComprobantes = async (context) => {
     'input[name="fechaEmisionDesde"]', context.getInvoiceSearchStartDate()
   )
   await context.page.selectOption('select[name="idTipoComprobante"]', ID_FACTURA_C)
-  await context.waitForPage()
   await context.page.selectOption(
-    'select[name="puntoDeVenta"]',
-    process.env.N_PUNTO_VENTA || '1'
+    'select[name="puntoDeVenta"]', context.getSalesPointNumber() || '1'
   )
-  await context.waitForPage()
   await context.page.click('input[value="Buscar"]')
   await context.waitForPage()
 }

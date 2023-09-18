@@ -6,13 +6,14 @@ export class EnvContext {
 
   async init() {
     await this.initBrowser()
-    this.detalle = this.randomDetalle()
+    this.loadRandomDetail()
+    this.loadInvoiceValues()
   }
 
   async initBrowser() {
     // disable headless to see the browser's action
     this.browser = await chromium.launch({
-      headless: false,
+      headless: process.env.RUN_HEADLESS === "true",
       args: ['--disable-dev-shm-usage'],
     })
     this.browserContext = await this.browser.newContext({
@@ -21,6 +22,10 @@ export class EnvContext {
     this.page = await this.browserContext.newPage()
 
     await this.page.setDefaultNavigationTimeout(0)
+  }
+
+  async reset() {
+    this.loadRandomDetail()
   }
 
   async end() {
@@ -75,13 +80,24 @@ export class EnvContext {
     return this.detalle
   }
 
-  getInvoiceValue() {
-    return process.env.IMPORTE
+  loadInvoiceValues() {
+    this.invoiceValues = JSON.parse(process.env.IMPORTES)
+    this.invoiceValuesIterator = this.invoiceValues[Symbol.iterator]()
   }
 
-  randomDetalle() {
-    var detallesArr = JSON.parse(process.env.DETALLES)
-    return randomArrayElement(detallesArr) || 'Servicios'
+  hasInvoiceValues() {
+    let result = this.invoiceValuesIterator.next()
+    this.invoiceValue = result.value
+    return !result.done
+  }
+
+  getInvoiceValue() {
+    return this.invoiceValue
+  }
+
+  loadRandomDetail() {
+    let detallesArr = JSON.parse(process.env.DETALLES)
+    this.detalle = randomArrayElement(detallesArr) || 'Servicios'
   }
 
   setInvoiceSearchStartDate (date) {

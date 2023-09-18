@@ -1,4 +1,4 @@
-export const selectComprobantesEnLinea= async (context) => {
+export const selectComprobantesEnLinea = async (context) => {
   await context.page.click('text=Ver todos')
   await context.waitForPage()
   await context.page.click('text=Comprobantes en línea')

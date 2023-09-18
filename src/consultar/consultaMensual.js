@@ -6,25 +6,23 @@ import { selectConsultas } from './selectConsultas.js'
 import { busquedaMensual } from './busquedaMensual.js'
 import { mostrarListado } from './mostrarListado.js'
 import { descargarFacturas } from './descargarFacturas.js'
+import { executeSteps } from '../common/executeSteps.js'
 
 async function main() {
-  let stepsClasses = [
+  let steps = [
     login,
     selectComprobantesEnLinea,
     selectEmpresa,
     selectConsultas,
     busquedaMensual,
     mostrarListado,
-    descargarFacturas
+    // descargarFacturas
   ]
 
   let context = new EnvContext()
-
   await context.init()
-  
-  for (let step of stepsClasses) {
-    await step(context)
-  }
+
+  await executeSteps(steps, context)
 
   await context.end()
 }

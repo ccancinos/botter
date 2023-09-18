@@ -1,5 +1,5 @@
-import { dateStartOfMonth } from '../common/helper'
-import { busquedaDeComprobantes } from '../common/busquedaDeComprobantes'
+import { dateStartOfMonth } from '../common/helper.js'
+import { busquedaDeComprobantes } from '../common/busquedaDeComprobantes.js'
 
 export const busquedaMensual = async (context) => {
   context.setInvoiceSearchStartDate(dateStartOfMonth())

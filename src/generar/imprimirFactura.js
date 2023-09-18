@@ -1,5 +1,5 @@
 import { v1 } from 'uuid'
-import { saveToSCV } from './SCVWriter.js'
+import { saveToSCV } from './CSVWriter.js'
 import { dateAsString, dateFormatted } from '../common/helper.js'
 
 export const imprimirFactura = async (context) => {
@@ -14,6 +14,6 @@ export const imprimirFactura = async (context) => {
     `${context.getDownloadPath()}/factura-${context.getUserCuil()}-${dateAsString()}-${v1()}.pdf`
   )
 
-  saveToSCV(dateFormatted(), context.getInvoiceDetail(), context.getInvoiceValue())
+  saveToSCV(context)
 }
 
