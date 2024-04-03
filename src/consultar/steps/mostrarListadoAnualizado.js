@@ -1,4 +1,4 @@
-import { getTableContent } from "../common/helper.js"
+import { getTableContent } from "../../common/helper.js"
 
 export const mostrarListadoAnualizado = async (context) => {
   await context.waitForPage()

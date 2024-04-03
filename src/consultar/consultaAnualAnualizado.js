@@ -1,11 +1,11 @@
 import { EnvContext } from '../common/EnvContext.js'
-import { login } from '../common/login.js'
-import { selectComprobantesEnLinea } from '../common/selectComprobantesEnLinea.js'
-import { selectEmpresa } from '../common/selectEmpresa.js'
-import { selectConsultas } from './selectConsultas.js'
-import { busquedaBiAnual } from './busquedaBiAnual.js'
-import { mostrarListadoAnualizado } from './mostrarListadoAnualizado.js'
 import { executeSteps } from '../common/executeSteps.js'
+import { login } from '../common/steps/login.js'
+import { selectComprobantesEnLinea } from '../common/steps/selectComprobantesEnLinea.js'
+import { selectEmpresa } from '../common/steps/selectEmpresa.js'
+import { selectConsultas } from './steps/selectConsultas.js'
+import { busquedaBiAnual } from './steps/busquedaBiAnual.js'
+import { mostrarListadoAnualizado } from './steps/mostrarListadoAnualizado.js'
 
 async function main() {
   let steps = [
@@ -19,7 +19,7 @@ async function main() {
 
   let context = new EnvContext()
   await context.init()
-  
+
   await executeSteps(steps, context)
 
   await context.end()

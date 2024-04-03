@@ -1,15 +1,15 @@
-import { login } from '../common/login.js'
-import { selectComprobantesEnLinea } from '../common/selectComprobantesEnLinea.js'
-import { selectEmpresa } from '../common/selectEmpresa.js'
-import { selectGenerarComprobantes } from './selectGenerarComprobantes.js'
-import { selectPuntoDeVentaYTipoDeComprobantes } from './selectPuntoDeVentaYTipoDeComprobantes.js'
-import { datosEmision } from './datosEmision.js'
-import { datosReceptor } from './datosReceptor.js'
-import { datosDeLaOperacion } from './datosDeLaOperacion.js'
-import { confirmGeneracion } from './confirmGeneracion.js'
-import { imprimirFactura } from './imprimirFactura.js'
+import { login } from '../common/steps/login.js'
+import { selectComprobantesEnLinea } from '../common/steps/selectComprobantesEnLinea.js'
+import { selectEmpresa } from '../common/steps/selectEmpresa.js'
+import { selectGenerarComprobantes } from './steps/selectGenerarComprobantes.js'
+import { selectPuntoDeVentaYTipoDeComprobantes } from './steps/selectPuntoDeVentaYTipoDeComprobantes.js'
+import { datosEmision } from './steps/datosEmision.js'
+import { datosReceptor } from './steps/datosReceptor.js'
+import { datosDeLaOperacion } from './steps/datosDeLaOperacion.js'
+import { confirmGeneracion } from './steps/confirmGeneracion.js'
+import { imprimirFactura } from './steps/imprimirFactura.js'
 import { executeSteps } from '../common/executeSteps.js'
-import { selectMenuPrincipal } from './selectMenuPrincipal.js'
+import { selectMenuPrincipal } from './steps/selectMenuPrincipal.js'
 import { createContext } from './createContext.js'
 
 async function main() {
@@ -28,7 +28,7 @@ async function main() {
     imprimirFactura
   ]
   let reset_steps = [
-    selectMenuPrincipal  
+    selectMenuPrincipal
   ]
 
   let context = await createContext()
@@ -40,6 +40,7 @@ async function main() {
     await executeSteps(process_steps, context)
     await executeSteps(reset_steps, context)
     await context.reset()
+    console.log('Factura generada por: $', context.getInvoiceValue())
   }
 
   await context.end()

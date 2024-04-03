@@ -1,6 +1,6 @@
 import { v1 } from 'uuid'
-import { saveToSCV } from './CSVWriter.js'
-import { dateAsString, dateFormatted } from '../common/helper.js'
+import { saveToSCV } from '../CSVWriter.js'
+import { dateAsString, dateFormatted } from '../../common/helper.js'
 
 export const imprimirFactura = async (context) => {
   const [download] = await Promise.all([

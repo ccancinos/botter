@@ -14,6 +14,6 @@ export const createContext = async () => {
   let executionMode = await inquirer.prompt(contextQuestion)
 
   return (executionMode.mode === 'Automático') ?
-    new EnvContext() : 
+    new EnvContext() :
     new InteractiveContext()
 }
