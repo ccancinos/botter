@@ -11,9 +11,13 @@ export const createContext = async () => {
     choices: ['Automático', 'Manual']
   }]
 
+  // Just to display how much is configured to invoice
+  const envContext = new EnvContext()
+  envContext.loadInvoiceValues()
+
   let executionMode = await inquirer.prompt(contextQuestion)
 
   return (executionMode.mode === 'Automático') ?
-    new EnvContext() :
+    envContext :
     new InteractiveContext()
 }

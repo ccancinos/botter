@@ -13,11 +13,7 @@ import { selectMenuPrincipal } from './steps/selectMenuPrincipal.js'
 import { createContext } from './createContext.js'
 
 async function main() {
-  let setup_steps = [
-    login,
-    selectComprobantesEnLinea,
-    selectEmpresa
-  ]
+  let setup_steps = [login, selectComprobantesEnLinea, selectEmpresa]
   let process_steps = [
     selectGenerarComprobantes,
     selectPuntoDeVentaYTipoDeComprobantes,
@@ -25,18 +21,16 @@ async function main() {
     datosReceptor,
     datosDeLaOperacion,
     confirmGeneracion,
-    imprimirFactura
+    imprimirFactura,
   ]
-  let reset_steps = [
-    selectMenuPrincipal
-  ]
+  let reset_steps = [selectMenuPrincipal]
 
   let context = await createContext()
 
   await context.init()
   await executeSteps(setup_steps, context)
 
-  while(await context.hasInvoiceValues()) {
+  while (await context.hasInvoiceValues()) {
     await executeSteps(process_steps, context)
     await executeSteps(reset_steps, context)
     await context.reset()

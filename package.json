@@ -16,6 +16,7 @@
     "consultar-anio": "node -r dotenv/config ./src/consultar/consultaAnio.js",
     "consultar-anualizado": "node -r dotenv/config ./src/consultar/consultaAnualAnualizado.js",
     "generar-vep": "node -r dotenv/config ./src/generarVep/generar-vep.js",
+    "importe": "node -r dotenv/config ./src/consultar/importe.js",
     "test": "node -r dotenv/config test.js",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",

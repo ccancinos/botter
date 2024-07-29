@@ -3,7 +3,6 @@ import process from 'node:process'
 import { randomArrayElement } from './helper.js'
 
 export class EnvContext {
-
   async init() {
     await this.initBrowser()
     this.loadRandomDetail()
@@ -13,8 +12,12 @@ export class EnvContext {
   async initBrowser() {
     // disable headless to see the browser's action
     this.browser = await chromium.launch({
-      headless: process.env.RUN_HEADLESS === "true",
+      headless: process.env.RUN_HEADLESS === 'true',
       args: ['--disable-dev-shm-usage'],
+      // logger: {
+      //   isEnabled: (name, severity) => true,
+      //   log: (name, severity, message, args) => console.log(`${name} ${message}`)
+      // }
     })
     this.browserContext = await this.browser.newContext({
       acceptDownloads: true,
@@ -83,6 +86,12 @@ export class EnvContext {
   loadInvoiceValues() {
     this.invoiceValues = JSON.parse(process.env.IMPORTES)
     this.invoiceValuesIterator = this.invoiceValues[Symbol.iterator]()
+
+    const totalInvoice = this.invoiceValues.reduce(
+      (acc, currentValue) => acc + Number(currentValue),
+      0
+    )
+    console.log('Total to invoice from .env: ', totalInvoice)
   }
 
   hasInvoiceValues() {
@@ -100,11 +109,11 @@ export class EnvContext {
     this.detalle = randomArrayElement(detallesArr) || 'Servicios'
   }
 
-  setInvoiceSearchStartDate (date) {
+  setInvoiceSearchStartDate(date) {
     this.invoiceSearchStartDate = date
   }
 
-  getInvoiceSearchStartDate () {
+  getInvoiceSearchStartDate() {
     return this.invoiceSearchStartDate
   }
 
