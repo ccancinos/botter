@@ -1,13 +1,14 @@
 import { createWriteStream, existsSync } from 'fs'
-import {  dateFormatted } from '../common/helper.js'
+import { dateFormatted } from '../common/helper.js'
 import CsvWriter from 'csv-write-stream'
 
 /**
-   * Guarda facturas generadas a CSV, la crea o agrega
-   * @param {date} fecha
-   * @param {string} item
-   * @param {string} monto
-   */
+ * Guarda facturas generadas a CSV, la crea o agrega
+ * @param {date} fecha
+ * @param {string} periodo
+ * @param {string} item
+ * @param {string} monto
+ */
 export const saveToSCV = async (context) => {
   const fecha = dateFormatted()
   const item = context.getInvoiceDetail()
@@ -21,8 +22,9 @@ export const saveToSCV = async (context) => {
     writer.pipe(createWriteStream(csvFilename))
     writer.write({
       header1: 'Fecha',
+      header2: 'Period',
       header3: 'Monto',
-      header2: 'Item',
+      header4: 'Item',
     })
     writer.end()
   }
@@ -32,8 +34,9 @@ export const saveToSCV = async (context) => {
   writer.pipe(createWriteStream(csvFilename, { flags: 'a' }))
   writer.write({
     header1: fecha,
+    header2: `${context.getInvoicePeriodStartDate()}-${context.getInvoicePeriodEndDate()}`,
     header3: monto,
-    header2: item,
+    header4: item,
   })
   writer.end()
 }
